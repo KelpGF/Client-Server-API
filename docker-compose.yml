@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: go-server
+    command: sh -c "tail -f /dev/null"
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/go/src/
+    working_dir: /go/src/
