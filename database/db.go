@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"time"
 
@@ -13,6 +14,8 @@ import (
 var db *sql.DB
 
 func StartDb() error {
+	log.Println("Starting database...")
+
 	sqlite3, err := sql.Open("sqlite3", "./database.db")
 	if err != nil {
 		log.Fatalf("Failed to open database: %v", err)
@@ -33,8 +36,12 @@ func CloseDb() {
 func Insert(ctx context.Context, quotation model.Quotation) error {
 	ctxDB, cancel := context.WithTimeout(ctx, 10*time.Millisecond)
 	defer cancel()
-
-	// time.Sleep(15 * time.Millisecond)
+	go func() {
+		<-ctxDB.Done()
+		if ctxDB.Err() == context.DeadlineExceeded {
+			fmt.Println("database context - ", ctxDB.Err())
+		}
+	}()
 
 	stmt, err := db.PrepareContext(ctxDB, "INSERT INTO quotation (id, code, codein, name, high, low, varBid, pctChange, bid, ask, timestamp, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {

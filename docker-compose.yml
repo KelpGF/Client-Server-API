@@ -1,8 +1,19 @@
 services:
-  app:
+  server:
     build: .
     container_name: go-server
-    command: sh -c "tail -f /dev/null"
+    entrypoint: sh -c "go run server.go"
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/go/src/
+    working_dir: /go/src/
+  client:
+    build: .
+    container_name: go-client
+    entrypoint: sh -c "go run client.go"
     environment:
       PORT: 8080
     ports:
