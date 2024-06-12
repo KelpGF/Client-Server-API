@@ -30,7 +30,7 @@ func GetQuotation(ctx context.Context) (model.Quotation, error) {
 	ctxRequest, cancel := initContext(ctx)
 	defer cancel()
 
-	request, err := http.NewRequestWithContext(ctxRequest, "GET", "http://localhost:8080/cotacao", nil)
+	request, err := http.NewRequestWithContext(ctxRequest, "GET", "http://go-server:8080/cotacao", nil)
 	if err != nil {
 		return data, err
 	}

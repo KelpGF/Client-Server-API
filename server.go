@@ -18,9 +18,10 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/cotacao", Handler)
 
-	port := os.Getenv("PORT")
-	log.Println("Server started on port " + port)
-	http.ListenAndServe(":"+port, mux)
+	HOST := os.Getenv("HOST")
+	PORT := os.Getenv("PORT")
+	log.Println("Server started on port " + PORT)
+	http.ListenAndServe(HOST+":"+PORT, mux)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
