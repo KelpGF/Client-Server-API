@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/KelpGF/Client-Server-API/model"
+	"github.com/KelpGF/Client-Server-API/server/model"
 	"github.com/google/uuid"
 )
 

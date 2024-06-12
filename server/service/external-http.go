@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/KelpGF/Client-Server-API/model"
+	"github.com/KelpGF/Client-Server-API/server/model"
 )
 
 type Response struct {

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/KelpGF/Client-Server-API/database"
-	"github.com/KelpGF/Client-Server-API/service"
+	"github.com/KelpGF/Client-Server-API/server/database"
+	"github.com/KelpGF/Client-Server-API/server/service"
 	_ "github.com/mattn/go-sqlite3"
 )
 

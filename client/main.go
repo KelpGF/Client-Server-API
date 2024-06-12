@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/KelpGF/Client-Server-API/model"
+	"github.com/KelpGF/Client-Server-API/client/model"
 )
 
 func main() {

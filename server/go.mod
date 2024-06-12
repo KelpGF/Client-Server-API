@@ -1,4 +1,4 @@
-module github.com/KelpGF/Client-Server-API
+module github.com/KelpGF/Client-Server-API/server
 
 go 1.22.3
 
