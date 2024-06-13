@@ -30,7 +30,11 @@ func GetQuotation(ctx context.Context) (model.Quotation, error) {
 	ctxRequest, cancel := initContext(ctx)
 	defer cancel()
 
-	request, err := http.NewRequestWithContext(ctxRequest, "GET", "http://go-server:8080/cotacao", nil)
+	host := os.Getenv("HOST_NAME")
+	if host == "" {
+		host = "localhost"
+	}
+	request, err := http.NewRequestWithContext(ctxRequest, "GET", "http://"+host+":8080/cotacao", nil)
 	if err != nil {
 		return data, err
 	}
@@ -52,9 +56,11 @@ func initContext(ctx context.Context) (context.Context, context.CancelFunc) {
 	ctxRequest, cancel := context.WithTimeout(ctx, 300*time.Millisecond)
 	go func() {
 		<-ctxRequest.Done()
-		if ctxRequest.Err() == context.DeadlineExceeded {
-			fmt.Println("http request context - ", ctxRequest.Err())
-		}
+		// if e, ok := ctxRequest.Err().(*json.SyntaxError); ok {
+		// 	fmt.Printf("syntax error at byte offset %d", e.Offset)
+		// } else {
+		fmt.Println("http request context - ", ctxRequest.Err())
+		// }
 	}()
 
 	return ctxRequest, cancel

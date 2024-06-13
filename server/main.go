@@ -20,6 +20,13 @@ func main() {
 
 	HOST := os.Getenv("HOST")
 	PORT := os.Getenv("PORT")
+	if HOST == "" {
+		HOST = "localhost"
+	}
+	if PORT == "" {
+		PORT = "8080"
+	}
+
 	log.Println("Server started on port " + PORT)
 	http.ListenAndServe(HOST+":"+PORT, mux)
 }
